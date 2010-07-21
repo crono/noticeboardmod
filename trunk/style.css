@@ -1,0 +1,242 @@
+/**
+ * Noticeboard Plugin - CSS
+ * 
+ * @author  Zaruba Tomas <zatomik@gmail.com>
+ */
+
+ p.noticeboard-editMessage{
+     clear:both;
+     font-weight:bold;
+}
+
+span.noticeboard-red{
+    color:red;
+    font-weight:bold;
+    font-size:0.8em;
+}
+
+ div.noticeboard-editForm{
+     text-align:left;     
+     clear:both;
+     padding:10px;
+     margin-bottom:10px;
+     width:400px;
+     border:1px solid __border__;
+}
+
+div.noticeboard-editForm p.category{
+    margin-bottom:2px;
+}
+
+div.noticeboard-editForm label{
+    padding-bottom:2px;
+    padding-top:1em;
+    display:block;
+}
+
+div.noticeboard-editForm label.line{
+    display:inline;
+    padding:0  0 0 10px;
+}
+
+div.noticeboard-editForm #noticeboard-name{
+    width:200px;
+}
+
+div.noticeboard-editForm #noticeboard_addStartTimeButton,
+div.noticeboard-editForm #noticeboard_addEndTimeButton{
+    display:none;
+    margin-top:3.4em;
+    margin-left:5px;
+}
+
+div.noticeboard-editForm #noticeboard_addStartTime,
+div.noticeboard-editForm #noticeboard_addEndTime,
+div.noticeboard-editForm #noticeboard_deadlineDiv{       
+    margin-left:5px;
+}
+
+div.noticeboard-show a.button{
+    background:#fff url('../../tpl/default/images/buttonshadow.png');
+    background-repeat:repeat-x;
+    background-position:bottom;
+    display:block;
+    height:18px;
+    float:left;
+    border:1px solid __border__;
+    vertical-align:middle;
+    text-decoration:none !important;
+    padding:3px 10px 0 10px;
+    margin:0 0 0 0.5em;
+    color:__text__ !important;
+}
+
+div.noticeboard-show a.small{
+    font-weight:normal;
+    font-size:0.8em;
+    float:right;
+    height:14px;
+    padding:2px 5px 0 5px;
+}
+
+div.noticeboard-show form .small{    
+    font-weight:normal;
+    height:18px;
+    font-size:11px !important;
+    float:right !important;
+    padding:0 !important;
+    margin: 0 0 0 2px !important;
+}
+
+div.noticeboard-show a.button2{
+    background:#fff url('../../tpl/default/images/buttonshadow.png');
+    background-repeat:repeat-x;
+    background-position:bottom;    
+    line-height:21px;
+    width:100px;
+    border:1px solid __border__;
+    vertical-align:middle;
+    text-decoration:none !important;
+    padding:2px 10px 3px 10px;
+    margin:0 0 0 0.5em;
+    color:__text__ !important;
+}
+div.noticeboard-show div.noticeboard-modeButtons{
+    height:30px;
+    padding-bottom:5px;
+}
+
+div.noticeboard-show table.noticeboard-event,
+table.noticeboard-show-detail{
+    width:100%;
+    max-width:500px;
+}
+
+table.noticeboard-show-detail{
+    float:right;
+    width:400px;
+    padding-left:10px;
+}
+
+
+div.noticeboard-show table thead th,
+table.noticeboard-show-detail thead th{
+    background-color: #dee7ec;
+    border: 1px solid __border__;
+    vertical-align:middle;
+    padding:3px 5px 3px 5px;
+    text-align:left;
+}
+
+div.noticeboard-show table tbody td,
+table.noticeboard-show-detail tbody td{
+    border: 1px solid __border__;
+    border-top:0 solid white;
+    padding:15px 5px 10px 5px;
+    background-color:white;
+}
+
+div.noticeboard-show table tbody td,
+table.noticeboard-show-detail tbody td{
+    border: 1px solid __border__;
+    border-top:0 solid white;
+    padding:5px;
+}
+
+div.noticeboard-show table tbody td.left,
+table.noticeboard-show-detail tbody td.left{
+    text-align:right;
+    width:100px;
+}
+
+div.noticeboard-show table thead th.cat,
+table.noticeboard-show-detail thead th.cat{
+    font-weight:normal;
+    text-align:right;
+}
+
+div.noticeboard-show table tbody td p,
+table.noticeboard-show-detail tbody td p{
+    margin-bottom:3px;
+}
+
+div.noticeboard-show table:hover thead th{
+    background-color: #bad1de;
+}
+
+
+div.noticeboard-show form.noticeboard-listForm{
+    border:1px solid __border__;
+    width:478px;
+    display:block;
+    padding:10px;
+    margin-bottom:10px;
+    clear:both;
+}
+
+form.noticeboard-listForm p{
+    padding: 0 0 0 0;
+    margin:0;
+}
+
+form.noticeboard-listForm label{
+    padding-left:5px;
+}
+
+form.noticeboard-listForm .submit{
+    float:right;    
+}
+
+div.noticeboard-show table.noticeboard_calendar_header{
+    width:100%;
+    text-align:center;
+    border:1px solid __border__;
+    margin-top:15px;
+}
+
+div.noticeboard-show table.noticeboard_calendar_header th.right{
+    text-align:right;
+}
+
+div.noticeboard-show table.noticeboard_calendar_header th.left{
+    text-align:left;
+}
+
+div.noticeboard-show table.noticeboard_calendar{  
+    width:100%;
+    border-top:1px solid __border__;
+    border-left:1px solid __border__;
+}
+
+div.noticeboard-show table.noticeboard_calendar th{
+    border-right:1px solid __border__;
+    border-bottom:1px solid __border__;
+    padding:5px;
+    text-align:center;
+    background-color: #dee7ec;    
+}
+
+div.noticeboard-show table.noticeboard_calendar td{
+    border-right:1px solid __border__;
+    border-bottom:1px solid __border__;
+    border-top:0 solid __border__;
+    border-left:0 solid __border__;
+    padding:5px;    
+}
+
+div.noticeboard-show table.noticeboard_calendar td.today,
+div.noticeboard-show table.noticeboard_calendar td.today:hover{
+    background-color: #dee7ec;
+}
+
+div.noticeboard-show table.noticeboard_calendar td:hover{
+    background-color: #eee;
+}
+
+div.noticeboard-show table.noticeboard_calendar td span.day-number{
+    display:block;
+    width:20px;
+    font-size:0.85em;
+    float:left;
+    border:0px solid black;
+}
