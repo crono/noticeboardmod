@@ -321,11 +321,58 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
         }
         return $valid;
     }
+	
+	private function _notifyGroup() {
+		Global $ACT;
+        Global $ID;
+        Global $TEXT;
+        Global $INFO;
+		
+		/*
+		$to = 'dk1844@gmail.com';
+		$subject = 'jakasi zmena';
+		$body = 'Ahoj!<br />ACT=' . $ACT . '<br/>ID='. $ID . '<br/>TEXT='. $TEXT   . '<br/>INFO='. $INFO .'<br/>END' . $this->getConf('watchGroup') . serialize($this->_getAddresses());
+		mail_send($to, $subject, $body);
+		*/
+		
+		$adds = $this->_getAddresses();
+		$subject = 'jakasi zmena';
+		$body = $ID . ' se zmenilo!' . DOKU_LF . 'novy text je: ' . $TEXT . DOKU_LF . '|' . $adds[0] . '|' .  $adds[1];
+		
+		foreach ($adds as $mail_ad) {
+			mail_send($mail_ad, $subject, $body);
+		}
+		
+		
+		
+	}
 
+	/* returns array of addresses, or an empty array */
+	private function _getAddresses() {
+		global $auth;
+		$newlist = array();
+		
+		$filter['grps']=$this->getConf('watchGroup');
+
+		$userlist = $auth->retrieveUsers(0,0,$filter);
+	
+		foreach ( $userlist as $user) {
+			$newlist[] = $user[mail]; //creating array of email adresses;
+		}
+		
+		//mail_isvalid  ??
+		
+		return $newlist;
+	}
+	
 
     private function _saveNotice(){
          Global $ID;
          
+		 //send mail here
+			$this->_notifyGroup();
+		 //end
+		 
          $notice = new helper_plugin_noticeboard_Notice();
          $notice->setCategory(htmlspecialchars($_REQUEST['noticeboard_category'], ENT_QUOTES));
          $notice->setName(htmlspecialchars($_REQUEST['noticeboard_name'], ENT_QUOTES));

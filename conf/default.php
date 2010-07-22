@@ -10,4 +10,5 @@
  * @author zatomik
  */
 $conf['listSize'] = 10;
+$conf['watchGroup']= 'watch';
 ?>
