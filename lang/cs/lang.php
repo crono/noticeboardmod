@@ -85,4 +85,12 @@ $lang['mon']            = 'Měsíc';
 $lang['select']         = 'Vybrat';
 
 
+//DK
+
+$lang['medium_date'] = '%d. %m. %Y %H:%M';
+
+$lang['record_edited'] = 'Záznam upraven';
+$lang['record_edited2'] = 'Záznam %s byl upraven uživatelem %s (čas: %s).';
+
+
 ?>
