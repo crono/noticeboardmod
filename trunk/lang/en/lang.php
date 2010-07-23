@@ -89,4 +89,10 @@ $lang['rssDesc']        = 'RSS Feed from noticeboard plugin';
 $lang['moreInfo']       = 'More information';
 $lang['getRSS']         = 'RSS';
 $lang['iCal']           = 'iCal';
+
+//DK
+$lang['medium_date'] = '%m/%d/%Y %H:%M';
+
+$lang['record_edited'] = 'Record edited';
+$lang['record_edited2'] = 'Record %s has just been edited by %s (on %s).';
 ?>
