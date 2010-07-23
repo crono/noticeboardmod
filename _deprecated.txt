@@ -1,0 +1,26 @@
+// To send HTML mail, the Content-type header must be set
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		
+		/*
+		$to = 'dk1844@gmail.com';
+		$subject = 'jakasi zmena';
+		$body = 'Ahoj!<br />ACT=' . $ACT . '<br/>ID='. $ID . '<br/>TEXT='. $TEXT   . '<br/>INFO='. $INFO .'<br/>END' . $this->getConf('watchGroup') . serialize($this->_getAddresses());
+		mail_send($to, $subject, $body);
+		*/
+		
+		$adds = $this->_getAddresses();
+		$subject = 'jakasi zmena';
+		//$body = $ID . ' se zmenilo!' . DOKU_LF . 'novy text je: ' . $this->render($TEXT) . DOKU_LF . '|' . $adds[0] . '|' .  $adds[1];
+		
+		//$body = $this->render($TEXT) ;
+	
+		
+	
+
+		
+		foreach ($adds as $mail_ad) {
+			//mail_send($mail_ad, $subject, $body,'','','',$headers);
+			mail($mail_ad, $subject, $body, $headers);
+		}
+		
