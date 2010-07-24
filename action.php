@@ -446,14 +446,24 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
         Global $INFO;
 		
 		$adds = $this->_getAddresses();
-		$subject = 'jakasi zmena';
-	
+		
+		
 		//$body = $ID . ' se zmenilo!' . DOKU_LF . 'novy text je: ' . $this->render($TEXT) . DOKU_LF . '|' . $adds[0] . '|' .  $adds[1];
 		
 		//$body = $this->render($TEXT) ;
-	
-		$bodyhtml = $this->_buildHtmlDiff($ID, $TEXT); //!!!!!! new or change???
-		$bodyplain = 'plain zmena';
+		
+		if(page_exists($ID)) {
+			$subject = 'jakasi zmena';
+			$bodyhtml = $this->_buildHtmlDiff($ID, $TEXT);
+			$bodyplain = 'plain zmena';
+		
+		} else {
+			$subject = 'nova vec!';
+			$bodyhtml = $this->render($TEXT); 
+			$bodyplain = 'nova vec';
+		}
+		
+		
 		
 		foreach ($adds as $to) {
 			//mail_send($mail_ad, $subject, $body,'','','',$headers);
