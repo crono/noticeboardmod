@@ -561,6 +561,10 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
          $notice->setCategory(htmlspecialchars($_REQUEST['noticeboard_category'], ENT_QUOTES));
          $notice->setName(htmlspecialchars($_REQUEST['noticeboard_name'], ENT_QUOTES));
          $notice->setPlace(htmlspecialchars($_REQUEST['noticeboard_place'], ENT_QUOTES));
+		 
+		 //dk color
+		 $notice->setColor(htmlspecialchars($_REQUEST['noticeboard_color'], ENT_QUOTES));
+		 
          $notice->setStartTime($this->start);
          if($_REQUEST['noticeboard_start_time']){
              $notice->setHasStartTime(true);
@@ -623,6 +627,14 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
                  $out .= "</td></tr>";
             }
 
+			//color
+            if($this->notice->getColor()){
+                 $out .= "<tr><td class='left'><strong>".$this->getLang('color').":</strong></td><td colspan='2'>";
+                 $out .= $this->notice->getColor();
+                 $out .= "</td></tr>";
+            }
+			
+			
             $out .= "</tbody></table>";
         echo $out;
     }

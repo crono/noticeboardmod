@@ -337,6 +337,12 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
                  $out .= "</td></tr>";
             }
             
+			if($notice->getColor()){
+                 $out .= "<tr><td class='left'><strong>".$this->getLang('color').":</strong></td><td colspan='2'>";
+                 $out .= $notice->getColor();
+                 $out .= "</td></tr>";
+            }
+			
             $out .= "</tbody></table>";
             
 

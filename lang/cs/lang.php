@@ -105,5 +105,16 @@ $lang['newVersion'] = "Nová verze";
 
 $lang['current'] = "aktuální";
 
+//color
+$lang['color'] = "Barva";
+	   
+	   
+$lang['availableColorNames'] = array(
+	'#ff0000' => 'Červená',
+	'#00ff00' => 'Zelená',
+	'#0000ff' => 'Modrá',
+);
+
+
 
 ?>
