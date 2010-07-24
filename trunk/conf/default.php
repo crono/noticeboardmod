@@ -11,4 +11,12 @@
  */
 $conf['listSize'] = 10;
 $conf['watchGroup']= 'watch';
+
+$conf['availableColors'] = array(
+	'#ff0000',
+	'#00ff00',
+	'#0000ff',
+);
+
+
 ?>

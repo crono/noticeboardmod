@@ -108,5 +108,16 @@ $lang['newVersion'] = "New version";
 
 $lang['current'] = "current";
 
+//color
+$lang['color'] = "color";
+	   
+	   
+$lang['availableColorNames'] = array(
+	'#ff0000' => 'Red',
+	'#00ff00' => 'Green',
+	'#0000ff' => 'Blue',
+);
+
+
 
 ?>

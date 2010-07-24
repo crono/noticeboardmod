@@ -22,6 +22,7 @@ class helper_plugin_noticeboard_Notice extends DokuWiki_Plugin{
     private $noticeId;
     private $name;
     private $place;
+	private $color; //DK
     private $startTime;
     private $hasStartTime;
     private $endTime;
@@ -69,6 +70,14 @@ class helper_plugin_noticeboard_Notice extends DokuWiki_Plugin{
 
     public function getPlace(){
         return $this->place;
+    }
+	//color dk
+    public function setColor($color){
+        $this->color = $color;
+    }
+
+    public function getColor(){
+        return $this->color;
     }
 
     public function setStartTime($time){

@@ -22,6 +22,7 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
     private $Name;
     private $category;
     private $Place;
+	private $color; //DK
     private $startDate;
     private $startTime;
     private $endDate;
@@ -79,6 +80,7 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
             $this->Name = $notice->getName();
             $this->category = $notice->getCategory();
             $this->Place = $notice->getPlace();
+			$this->color = $notice->getColor(); //DK
             if($notice->getDeadline()){
                 $this->deadline = date("d.m.Y",$notice->getDeadline());
             }            
@@ -104,6 +106,9 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
         }
         if($_REQUEST['noticeboard_place']){
             $this->Place = $_REQUEST['noticeboard_place'];
+        }
+        if($_REQUEST['noticeboard_color']){ //DK
+            $this->color = $_REQUEST['noticeboard_color'];
         }
         if($_REQUEST['noticeboard_start_date']){
             $this->startDate = $_REQUEST['noticeboard_start_date'];
@@ -146,6 +151,25 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
         $data .= "<br>";
         $data .= "<label for='noticeboard_place'>".$this->getLang('place').":</label>";
         $data .= "<input type='text' id='noticeboard_place' name='noticeboard_place' value='".$this->Place."' />";
+
+		//DK color
+		$colors = $this->getConf('availableColors');
+		$color_names = $this->getLang('availableColorNames');
+		
+		$data .= "<label for='noticeboard_color'>".$this->getLang('color').":</label>"; 
+		
+		$data .= '<select id="noticeboard_color" name="noticeboard_color" size="1">' ;
+		$data .= '<option value="">blank</option>'; //??
+		foreach ($colors as $current_color) {
+			$bgclr = ' style="background-color:' . $current_color . ';" ';
+			$data .= '<option value="' . $current_color . '" ' . $bgclr . (($current_color == $this->color)?' selected ':'') . '>' . $color_names[$current_color] . '</option>'; //plus selected!
+		}
+		$data .= '</select>';
+       
+		/*
+		$data .= "<input type='text' id='noticeboard_color' name='noticeboard_color' value='".$this->color."' />";
+		*/
+		
         $data .= "<br><table border='0'>";
         $data .= "<tr><td><label for='noticeboard_start_date'>".$this->getLang('startDate').":*<br /><small>".$this->getLang('dateFormat')."</small></label>";
         $data .= "<input type='text' id='noticeboard_start_date' name='noticeboard_start_date' value='".$this->startDate."' /></td>";
