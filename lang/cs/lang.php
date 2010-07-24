@@ -87,10 +87,23 @@ $lang['select']         = 'Vybrat';
 
 //DK
 
-$lang['medium_date'] = '%d. %m. %Y %H:%M';
+$lang['medium_date'] = '%d.%m.%Y %H:%M';
 
 $lang['record_edited'] = 'Záznam upraven';
 $lang['record_edited2'] = 'Záznam %s byl upraven uživatelem %s (čas: %s).';
+$lang['record_edited_subject'] = 'Záznam upraven [%s]';
+
+$lang['record_created'] = 'Záznam vytvořen';
+$lang['record_created2'] = 'Nový záznam %s byl právě vytvořen uživatelem %s (čas: %s).';
+$lang['record_created_subject'] = 'Záznam vytvořen [%s]';
+
+
+$lang['sentBy'] = "Tento e-mail byl automaticky vygenerován pomocí Dokuwiki na "; // a link follows
+$lang['originalVersion'] = "Původní verze";
+$lang['newVersion'] = "Nová verze";
+
+
+$lang['current'] = "aktuální";
 
 
 ?>
