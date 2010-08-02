@@ -592,9 +592,12 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
     private function _showDetail(){
         Global $INFO;
         Global $ID;
-            $out .= "<table class='noticeboard-show-detail' cellspacing='0'><thead><tr><th colspan='2'>";
+			
+			$cstyle = ' style="background-color:' . $this->notice->getColor() .';" ';
+		
+            $out .= '<table class="noticeboard-show-detail" cellspacing="0"><thead><tr><th colspan="2"' . $cstyle . '>';
             $out .= $this->notice->getName();         
-            $out .= "</th><th width='80' class='cat'>";
+            $out .= '</th><th width="80" class="cat" ' . $cstyle . ' >';
             $out .= $this->notice->getCategory();
             $out .= "</th></tr></thead><tbody><tr><td class='left'>";
             $out .= "<strong>".$this->getLang('startTime').":</strong></td><td colspan='2'> ";
@@ -628,12 +631,12 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
             }
 
 			//color
-            if($this->notice->getColor()){
+          /*  if($this->notice->getColor()){
                  $out .= "<tr><td class='left'><strong>".$this->getLang('color').":</strong></td><td colspan='2'>";
                  $out .= $this->notice->getColor();
                  $out .= "</td></tr>";
             }
-			
+			*/
 			
             $out .= "</tbody></table>";
         echo $out;

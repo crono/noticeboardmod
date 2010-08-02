@@ -158,6 +158,7 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
 		
 		$data .= "<label for='noticeboard_color'>".$this->getLang('color').":</label>"; 
 		
+		//this is color selection in formEdit while editing or creating a new notice.
 		$data .= '<select id="noticeboard_color" name="noticeboard_color" size="1">' ;
 		$data .= '<option value="">blank</option>'; //??
 		foreach ($colors as $current_color) {

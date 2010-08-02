@@ -290,8 +290,10 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         $arrayList = $noticeList->getNoticeList($start,$start + $this->getConf('listSize'));        
         while(($arrayList && $arrayList->hasNext()) ){
             $notice = $arrayList->next();
-
-            $out .= "<table class='noticeboard-event' cellspacing='0'><thead><tr><th colspan='2'>";
+			
+			$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
+			
+            $out .= '<table class="noticeboard-event" cellspacing="0"><thead><tr><th colspan="2"' . $cstyle . '>';
             $out .= '<a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="">'.$notice->getName().'</a>';
 
             if($INFO['perm'] >= 2){
@@ -304,7 +306,7 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
                 $out .= '<a href="' . wl($notice->getId(), array('do' => 'edit')) . '" class="button small" title="">'.$this->getLang('edit').'</a>';
             }
 
-            $out .= "</th><th width='80' class='cat'>";
+            $out .= '</th><th width="80" class="cat" ' . $cstyle . ' >';
             $out .= $this->getLang($notice->getCategory());
             $out .= "</th></tr></thead><tbody><tr><td class='left'>";
             $out .= "<strong>".$this->getLang('startTime').":</strong></td><td colspan='2'> ";
@@ -337,12 +339,12 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
                  $out .= "</td></tr>";
             }
             
-			if($notice->getColor()){
+		/*	if($notice->getColor()){
                  $out .= "<tr><td class='left'><strong>".$this->getLang('color').":</strong></td><td colspan='2'>";
                  $out .= $notice->getColor();
                  $out .= "</td></tr>";
             }
-			
+		*/	
             $out .= "</tbody></table>";
             
 
@@ -553,8 +555,9 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         while(($arrayList && $arrayList->hasNext()) ){
             $notice = $arrayList->next();
 
-           
-            $out .= '<li><a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="">'.$notice->getName().$notice->hasStartTime().'</a> ';
+			$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
+		   
+            $out .= '<li><a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="" ' . $cstyle . '>'.$notice->getName().$notice->hasStartTime().'</a> ';
             /*if($notice->hasStartTime()){
                     $out .= date("H:i",$notice->getStartTime());
             }*/
