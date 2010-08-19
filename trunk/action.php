@@ -199,6 +199,7 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 
         //delete post - only for auth
         if($_POST['noticeboard_delete'] && $INFO['perm'] >= 2){
+			$this->_notifyGroup('del', $_POST['noticeboard_delete']);
            $noticeList->deleteNotice($_POST['noticeboard_delete']);
         }
 
@@ -493,12 +494,46 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 		return $content;
 	}
 	
+	private function _buildDel($id, $html = true) {
+		$content = '';
+		$txt = rawWiki($id,'');
+		if($html) {
+			//html version
+			
+			$record_link = '<a href="'.wl($id,'',true).'">' . $id. '</a>';
+			$content .= "<html>\n<body>\n" . 
+						
+						"<h1>" . $this->getLang('record_deleted') . "</h1>" .
+						
+						"<p>" . sprintf($this->getLang('record_deleted2'), $record_link, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . "</p>" .
+						
+						$this->render($txt) .
+						
+						$this->_buildFooter() .
+						
+						"</body>\n</html>";
+			
+			
+		} else {
+			//plain version
+			$content .= $this->getLang('record_deleted') . DOKU_LF .
+						
+						sprintf($this->getLang('record_deleted2'), $id, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
+						
+						
+						$this->render($txt) . //???
+						
+						$this->_buildFooter(false); //non html
+						
+		}
+		return $content;
+	}
 	private function _getLastRev($id) {
 		$list = getRevisions($id,0,1);
 		return $list[0];
 	}
 	
-	private function _notifyGroup() {
+	private function _notifyGroup($type = 'new_mod', $id = 0) {
 		Global $ACT;
         Global $ID;
         Global $TEXT;
@@ -511,18 +546,26 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 		
 		//$body = $this->render($TEXT) ;
 		
-		if(page_exists($ID)) {
-			$subject = sprintf($this->getLang('record_edited_subject'), DOKU_URL);
-			$bodyhtml = $this->_buildHtmlDiff($ID, $TEXT);
-			$bodyplain = 'plain zmena';
-		
+		if($type=='new_mod') {
+			//new or modded
+			
+			if(page_exists($ID)) { //TODO: nebo treba deleted?
+				$subject = sprintf($this->getLang('record_edited_subject'), DOKU_URL);
+				$bodyhtml = $this->_buildHtmlDiff($ID, $TEXT);
+				$bodyplain = 'plain zmena';
+			
+			} else {
+				$subject = sprintf($this->getLang('record_created_subject'), DOKU_URL);
+				$bodyhtml = $this->_buildNew($ID, $TEXT) ; 
+				$bodyplain = $this->_buildNew($ID, $TEXT, false);
+			}
+			
 		} else {
-			$subject = sprintf($this->getLang('record_created_subject'), DOKU_URL);
-			$bodyhtml = $this->_buildNew($ID, $TEXT) ; 
-			$bodyplain = $this->_buildNew($ID, $TEXT, false);
+			//deleted
+			$subject = sprintf($this->getLang('record_deleted_subject'), DOKU_URL);
+			$bodyhtml = $this->_buildDel($id) ; 
+			$bodyplain = $this->_buildDel($id, false);
 		}
-		
-		
 		
 		foreach ($adds as $to) {
 			//mail_send($mail_ad, $subject, $body,'','','',$headers);
@@ -584,7 +627,7 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
          $noticeList->addNotice($notice);
         
 		//send mail here
-			$this->_notifyGroup();
+			$this->_notifyGroup('new_mod');
 		 //end
 		 
     }

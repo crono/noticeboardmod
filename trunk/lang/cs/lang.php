@@ -97,6 +97,9 @@ $lang['record_created'] = 'Záznam vytvořen';
 $lang['record_created2'] = 'Nový záznam %s byl právě vytvořen uživatelem %s (čas: %s).';
 $lang['record_created_subject'] = 'Záznam vytvořen [%s]';
 
+$lang['record_deleted'] = 'Záznam smazán';
+$lang['record_deleted2'] = 'Záznam %s byl právě smazán uživatelem %s (čas: %s).';
+$lang['record_deleted_subject'] = 'Záznam smazán [%s]';
 
 $lang['sentBy'] = "Tento e-mail byl automaticky vygenerován pomocí Dokuwiki na "; // a link follows
 $lang['originalVersion'] = "Původní verze";
