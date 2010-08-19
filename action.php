@@ -407,62 +407,101 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 		return $footer;
 	}
 	
-	private function _buildHtmlDiff($id, $txt) {
+	private function _buildDiff($id, $txt, $html = true) {
 	
-		$df  		=	new Diff(explode("\n",htmlspecialchars(rawWiki($id,''))), /// tady porovnat $TEXT a id bez rev a mame vyhrano!
-						explode("\n",htmlspecialchars($txt)));
-						
-		$left_top	=	$this->getLang('originalVersion') . 
-						' (' . strftime($this->getLang('medium_date'),@filemtime(wikiFN($id))) . ')';
-						
-		$right_top	=	$this->getLang('newVersion') . 
-						' (' . $this->getLang('current') . ')';
-	 
-		$tdf 		=	 new TableDiffFormatter();
-	 
-	 
-		$record_link = '<a href="'.wl($id,'',true).'">' . $id. '</a>';
-		$diffHTML 	=	"<html>\n<body>\n" . 
-						
-						"<h1>" . $this->getLang('record_edited') . "</h1>" .
-						
-						
-						"<p>" . sprintf($this->getLang('record_edited2'), $record_link, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . "</p>" .
-						
-						
-						// strftime($conf['dformat']) 
-						
-						
-						'<table>' . "\n" .
-						'<tr>' . "\n" .
-						'<th width="50%" colspan="2">'  . $left_top  . '</th>' . "\n" .
-						'<th width="50%" colspan="2">' . $right_top . '</th>' . "\n" .
-						'</tr>' . "\n" .
-						
-						$tdf->format($df) . // format diff 
-						
-						'</table>' . "\n" .
-						
-						$this->_buildFooter() .
-						
-						"</body>\n</html>";
-	 
-		$diffHTML	=	str_replace('class="diff-blockheader"','style="font-weight: bold; font-family: courier new;"',$diffHTML);
-		$diffHTML 	=	str_replace('class="diff-addedline"','style="background-color: #ddffdd; font-family: courier new;"',$diffHTML);
-		$diffHTML 	=	str_replace('class="diff-deletedline"','style="background-color: #ffffbb; font-family: courier new;"',$diffHTML);
-		$diffHTML 	=	str_replace('class="diff-context"','style="background-color: #f5f5f5; font-family: courier new;"',$diffHTML);	
-		$diffHTML 	=	str_replace('class="diffchange"','style="color: red;"',$diffHTML);
-		$diffHTML 	=	str_replace('<strong>','<strong><font color="#FF0000">',$diffHTML);
-		$diffHTML 	=	str_replace('</strong>','</font></strong>',$diffHTML);
-		$diffHTML 	=	str_replace('<td>','<td style="font-family: courier new;">',$diffHTML);
+		if(html) {
+//		if(false) {
+		
+			$df  		=	new Diff(explode("\n",htmlspecialchars(rawWiki($id,''))), /// tady porovnat $TEXT a id bez rev a mame vyhrano!
+							explode("\n",htmlspecialchars($txt)));
+							
+			$left_top	=	$this->getLang('originalVersion') . 
+							' (' . strftime($this->getLang('medium_date'),@filemtime(wikiFN($id))) . ')';
+							
+			$right_top	=	$this->getLang('newVersion') . 
+							' (' . $this->getLang('current') . ')';
+		 
+			$tdf 		=	 new TableDiffFormatter();
+		 
+		 
+			$record_link = '<a href="'.wl($id,'',true).'">' . $id. '</a>';
+			$diffHTML 	=	"<html>\n<body>\n" . 
+							
+							"<h1>" . $this->getLang('record_edited') . "</h1>" .
+							
+							
+							"<p>" . sprintf($this->getLang('record_edited2'), $record_link, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . "</p>" .
+							
+							
+							// strftime($conf['dformat']) 
+							
+							
+							'<table>' . "\n" .
+							'<tr>' . "\n" .
+							'<th width="50%" colspan="2">'  . $left_top  . '</th>' . "\n" .
+							'<th width="50%" colspan="2">' . $right_top . '</th>' . "\n" .
+							'</tr>' . "\n" .
+							
+							$tdf->format($df) . // format diff 
+							
+							'</table>' . "\n" .
+							
+							$this->_buildFooter() .
+							
+							"</body>\n</html>";
+		 
+			$diffHTML	=	str_replace('class="diff-blockheader"','style="font-weight: bold; font-family: courier new;"',$diffHTML);
+			$diffHTML 	=	str_replace('class="diff-addedline"','style="background-color: #ddffdd; font-family: courier new;"',$diffHTML);
+			$diffHTML 	=	str_replace('class="diff-deletedline"','style="background-color: #ffffbb; font-family: courier new;"',$diffHTML);
+			$diffHTML 	=	str_replace('class="diff-context"','style="background-color: #f5f5f5; font-family: courier new;"',$diffHTML);	
+			$diffHTML 	=	str_replace('class="diffchange"','style="color: red;"',$diffHTML);
+			$diffHTML 	=	str_replace('<strong>','<strong><font color="#FF0000">',$diffHTML);
+			$diffHTML 	=	str_replace('</strong>','</font></strong>',$diffHTML);
+			$diffHTML 	=	str_replace('<td>','<td style="font-family: courier new;">',$diffHTML);
 
-	
-		return $diffHTML;
+
+			return $diffHTML;
+		} else {
+			//non html
+			$diff = '';
+			
+			/*				"<h1>" . $this->getLang('record_edited') . "</h1>" .
+							
+							
+							"<p>" . sprintf($this->getLang('record_edited2'), $record_link, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . "</p>" .
+							
+							$left_top	=	$this->getLang('originalVersion') . 
+							' (' . strftime($this->getLang('medium_date'),@filemtime(wikiFN($id))) . ')';
+							
+			$right_top	=	$this->getLang('newVersion') . 
+							' (' . $this->getLang('current') . ')';
+		 
+			*/
+			
+			$diff .= $this->getLang('record_edited') . DOKU_LF .
+						
+				sprintf($this->getLang('record_edited2'), $id . " (" . wl($id,'',true) .")", $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
+				
+				DOKU_LF .
+				$this->getLang('originalVersion') . DOKU_LF .
+				rawWiki($id,'') . DOKU_LF . DOKU_LF .
+				
+				$this->getLang('newVersion') . DOKU_LF .
+				formText($txt) .
+				DOKU_LF .
+				
+				$this->_buildFooter(false); //non html
+			
+			return diff;
+			
+			//return '<pre>' . $diff . '</pre>';
+		}
 	}
 	
 	private function _buildNew($id, $txt, $html = true) {
 		$content = '';
 		if($html) {
+		//if(false) {
 			//html version
 			
 			$record_link = '<a href="'.wl($id,'',true).'">' . $id. '</a>';
@@ -483,21 +522,28 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 			//plain version
 			$content .= $this->getLang('record_created') . DOKU_LF .
 						
-						sprintf($this->getLang('record_created2'), $id, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
+						sprintf($this->getLang('record_created2'), $id . " (" . wl($id,'',true) .")", $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
 						
-						
-						$this->render($txt) . //???
+						DOKU_LF .
+						formText($txt) . //???
+						DOKU_LF .
 						
 						$this->_buildFooter(false); //non html
 						
 		}
-		return $content;
+		
+		return $content ;
+		//return '<pre>' . $content .'</pre>';
+		
 	}
 	
 	private function _buildDel($id, $html = true) {
 		$content = '';
 		$txt = rawWiki($id,'');
+		
+		
 		if($html) {
+		//if(false) {
 			//html version
 			
 			$record_link = '<a href="'.wl($id,'',true).'">' . $id. '</a>';
@@ -518,15 +564,18 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 			//plain version
 			$content .= $this->getLang('record_deleted') . DOKU_LF .
 						
-						sprintf($this->getLang('record_deleted2'), $id, $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
+						sprintf($this->getLang('record_deleted2'), $id . "(" . wl($id,'',true) .")", $_SERVER['REMOTE_USER'], strftime($this->getLang('medium_date')) ) . DOKU_LF .
 						
 						
-						$this->render($txt) . //???
+						DOKU_LF .
+						formText($txt) . //???
+						DOKU_LF .
 						
 						$this->_buildFooter(false); //non html
 						
 		}
 		return $content;
+		//return '<pre>' . $content .'</pre>';
 	}
 	private function _getLastRev($id) {
 		$list = getRevisions($id,0,1);
@@ -551,8 +600,8 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
 			
 			if(page_exists($ID)) { //TODO: nebo treba deleted?
 				$subject = sprintf($this->getLang('record_edited_subject'), DOKU_URL);
-				$bodyhtml = $this->_buildHtmlDiff($ID, $TEXT);
-				$bodyplain = 'plain zmena';
+				$bodyhtml = $this->_buildDiff($ID, $TEXT, true);
+				$bodyplain = $this->_buildDiff($ID, $TEXT, false);
 			
 			} else {
 				$subject = sprintf($this->getLang('record_created_subject'), DOKU_URL);

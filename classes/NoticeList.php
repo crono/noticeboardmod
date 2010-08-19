@@ -149,9 +149,15 @@ class helper_plugin_noticeboard_NoticeList extends DokuWiki_Syntax_Plugin {
             }
             $this->list->setPointer(0);  
             io_saveFile($file, serialize($this->list));
-			//io_saveFile($file, '');
-			//$fn = wikiFN($this->noticeboardId);
-			//io_saveFile($fn,'');
+			
+			//dk
+			$fn = wikiFN($noticeId);
+			//io_saveFile($fn,''); //doest work well, 
+			
+			if(is_file($fn)) {
+				unlink($fn);
+			}
+			//unlink($fn);
         }
     }
 
