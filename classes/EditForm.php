@@ -160,7 +160,7 @@ class helper_plugin_noticeboard_EditForm extends DokuWiki_Plugin{
 		
 		//this is color selection in formEdit while editing or creating a new notice.
 		$data .= '<select id="noticeboard_color" name="noticeboard_color" size="1">' ;
-		$data .= '<option value="">blank</option>'; //??
+		$data .= '<option value="">---</option>'; //??
 		foreach ($colors as $current_color) {
 			$bgclr = ' style="background-color:' . $current_color . ';" ';
 			$data .= '<option value="' . $current_color . '" ' . $bgclr . (($current_color == $this->color)?' selected ':'') . '>' . $color_names[$current_color] . '</option>'; //plus selected!

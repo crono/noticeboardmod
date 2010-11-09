@@ -69,6 +69,7 @@ div.noticeboard-show a.button{
     padding:3px 10px 0 10px;
     margin:0 0 0 0.5em;
     color:__text__ !important;
+	line-height: 100%;
 }
 
 div.noticeboard-show a.small{

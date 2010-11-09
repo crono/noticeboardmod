@@ -120,6 +120,11 @@ $lang['availableColorNames'] = array(
 	'#ff0000' => 'Red',
 	'#00ff00' => 'Green',
 	'#0000ff' => 'Blue',
+	'#a52a2a' => 'Brown',
+	'#ff8c00' => 'Orange',
+	'#9400d3' => 'Violet',
+	'#000000' => 'Black',
+
 );
 
 
