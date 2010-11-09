@@ -116,6 +116,11 @@ $lang['availableColorNames'] = array(
 	'#ff0000' => 'Červená',
 	'#00ff00' => 'Zelená',
 	'#0000ff' => 'Modrá',
+	'#a52a2a' => 'Hnědá',
+	'#ff8c00' => 'Oranžová',
+	'#9400d3' => 'Fialová',
+	'#000000' => 'Černá',
+
 );
 
 

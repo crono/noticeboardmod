@@ -685,11 +685,29 @@ class action_plugin_noticeboard extends DokuWiki_Action_Plugin {
         Global $INFO;
         Global $ID;
 			
-			$cstyle = ' style="background-color:' . $this->notice->getColor() .';" ';
-		
-            $out .= '<table class="noticeboard-show-detail" cellspacing="0"><thead><tr><th colspan="2"' . $cstyle . '>';
+			if ($this->notice->getColor()) {
+				$cstyle = ' style="color:' . $this->notice->getColor() .';" ';
+			}
+			
+            $out .= '<table class="noticeboard-show-detail" cellspacing="0"><thead><tr><th colspan="2" ' . $cstyle . '>';
+			
+			//btns
+/*			
+			if($INFO['perm'] >= 2){
+			 $script= script();
+             
+                $out .= "<form action='".$script."' method='post'>
+                <input type='hidden' name='id' value='".$ID."' />
+                <input type='hidden' name='noticeboard_delete' value='".$ID."' />
+                <input type='submit' class='button small' name='submit' value='".$this->getLang('delete')."' /></form>";
+               // $out .= '<a href="' . wl($ID, array('do' => 'show','noticeboard-delete' => $notice->getId())) . '" class="button small" title="">'.$this->getLang('delete').'</a>';
+                $out .= '<a href="' . wl($ID, array('do' => 'edit')) . '" class="button small" title="">'.$this->getLang('edit').'</a>';
+            }
+	*/		
+			
+			
             $out .= $this->notice->getName();         
-            $out .= '</th><th width="80" class="cat" ' . $cstyle . ' >';
+            $out .= '</th><th width="80" class="cat">';
             $out .= $this->notice->getCategory();
             $out .= "</th></tr></thead><tbody><tr><td class='left'>";
             $out .= "<strong>".$this->getLang('startTime').":</strong></td><td colspan='2'> ";

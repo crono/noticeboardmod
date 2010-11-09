@@ -268,7 +268,7 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         if($_SESSION['noticeboard_show_time']){
             $noticeList->setTimeFilter($_SESSION['noticeboard_show_time']);
         }else{
-            $noticeList->setTimeFilter(1);
+            $noticeList->setTimeFilter(3);
         }
         
         //set sort filter
@@ -291,10 +291,14 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         while(($arrayList && $arrayList->hasNext()) ){
             $notice = $arrayList->next();
 			
-			$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
+			if ($notice->getColor()) {
+				$cstyle = ' style="color:' . $notice->getColor() .';" ';
+			}
 			
-            $out .= '<table class="noticeboard-event" cellspacing="0"><thead><tr><th colspan="2"' . $cstyle . '>';
-            $out .= '<a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="">'.$notice->getName().'</a>';
+			//$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
+			
+            $out .= '<table class="noticeboard-event" cellspacing="0"><thead><tr><th colspan="2">';
+            $out .= '<a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="" ' . $cstyle . ' >'.$notice->getName().'</a>';
 
             if($INFO['perm'] >= 2){
              
@@ -306,7 +310,7 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
                 $out .= '<a href="' . wl($notice->getId(), array('do' => 'edit')) . '" class="button small" title="">'.$this->getLang('edit').'</a>';
             }
 
-            $out .= '</th><th width="80" class="cat" ' . $cstyle . ' >';
+            $out .= '</th><th width="80" class="cat">';
             $out .= $this->getLang($notice->getCategory());
             $out .= "</th></tr></thead><tbody><tr><td class='left'>";
             $out .= "<strong>".$this->getLang('startTime').":</strong></td><td colspan='2'> ";
@@ -533,7 +537,7 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         if($_SESSION['noticeboard_show_time']){
             $noticeList->setTimeFilter($_SESSION['noticeboard_show_time']);
         }else{
-            $noticeList->setTimeFilter(1);
+            $noticeList->setTimeFilter(3);
         }
 
         //set sort filter
@@ -555,7 +559,11 @@ class syntax_plugin_noticeboard extends DokuWiki_Syntax_Plugin {
         while(($arrayList && $arrayList->hasNext()) ){
             $notice = $arrayList->next();
 
-			$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
+			if ($notice->getColor()) {
+				$cstyle = ' style="color:' . $notice->getColor() .';" ';
+			}
+			
+			//$cstyle = ' style="background-color:' . $notice->getColor() .';" ';
 		   
             $out .= '<li><a href="' . wl($notice->getId(), array('do' => 'show')) . '" class="" title="" ' . $cstyle . '>'.$notice->getName().$notice->hasStartTime().'</a> ';
             /*if($notice->hasStartTime()){
