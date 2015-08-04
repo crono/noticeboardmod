@@ -1,0 +1,1 @@
+adding ability to inform users from a certain group when something has changed + maybe color differentiated events
